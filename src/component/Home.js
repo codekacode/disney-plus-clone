@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import ImageSlider from "./ImageSlider";
 
 function Home() {
   return (
     <Container>
-      <h1>Home</h1>
+      <ImageSlider />
     </Container>
   );
 }
