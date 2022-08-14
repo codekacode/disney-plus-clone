@@ -24,8 +24,12 @@ function Detail() {
           <img src="/images/play-icon-white.png" alt="" />
           <span>TRAILER</span>
         </TrailerButton>
-        <AddButton></AddButton>
-        <GroupWatchButton></GroupWatchButton>
+        <AddButton>
+          <span>+</span>
+        </AddButton>
+        <GroupWatchButton>
+          <img src="/images/group-icon.png" alt="group icon" />
+        </GroupWatchButton>
       </Controls>
     </Container>
   );
@@ -68,6 +72,7 @@ const ImageTitle = styled.div`
 
 const Controls = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const PlayButton = styled.button`
@@ -93,6 +98,23 @@ const TrailerButton = styled(PlayButton)`
   color: rgb(249, 249, 249);
 `;
 
-const AddButton = styled.button``;
+const AddButton = styled.button`
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin-right: 16px;
+  cursor: pointer;
+  span {
+    font-size: 30px;
+    color: white;
+  }
+`;
 
-const GroupWatchButton = styled.button``;
+const GroupWatchButton = styled(AddButton)`
+  background-color: rgb(0, 0, 0);
+`;
