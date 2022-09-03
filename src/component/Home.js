@@ -13,13 +13,6 @@ function Home() {
       });
       console.log(tempMovies);
     });
-    // .onSnapshot((snapshot) => {
-    //   console.log("hola" + snapshot.data());
-    // let tempMovies = snapshot.docs.map((doc) => {
-    //   return { id: doc.id, ...doc.data() };
-    // });
-    // console.log(tempMovies);
-    // });
   }, []);
 
   return (
