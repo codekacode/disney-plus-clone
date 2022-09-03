@@ -1,34 +1,20 @@
 import styled from "styled-components";
+import { selectMovies } from "../features/movie/movieSlice";
+import { useSelector } from "react-redux";
 
 function Movies() {
+  const movies = useSelector(selectMovies); // we have the global state
+
   return (
     <Container>
       <h4>Recommended for you</h4>
       <Content>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
-        <Wrap>
-          <img src="https://cdn.superaficionados.com/imagenes/17-mejores-peliculas-disney-up-una-aventura-de-altura-cke.jpg" />
-        </Wrap>
+        {movies &&
+          movies.map((movie) => (
+            <Wrap>
+              <img src={movie.cardImg} alt={movie.name} />
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );
