@@ -1,6 +1,29 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import db from "../firebase";
 
 function Detail() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState();
+
+  console.log(id);
+  useEffect(() => {
+    //grab movie info from db
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          //save movie data
+          setMovie(doc.data());
+        } else {
+          //redirect Home page
+        }
+      });
+  }, []);
+
+  console.log(movie);
   return (
     <Container>
       <Background>
