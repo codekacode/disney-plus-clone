@@ -14,7 +14,7 @@ function Movies() {
           movies.map((movie) => (
             <Wrap key={movie.id}>
               <Link to={`/detail/${movie.id}`}>
-                <img src={movie.cardImg} alt={movie.name} />
+                <img src={movie.cardImg} alt={movie.title} />
               </Link>
             </Wrap>
           ))}

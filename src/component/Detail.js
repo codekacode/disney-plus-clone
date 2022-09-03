@@ -7,7 +7,6 @@ function Detail() {
   const { id } = useParams();
   const [movie, setMovie] = useState();
 
-  console.log(id);
   useEffect(() => {
     //grab movie info from db
     db.collection("movies")
@@ -21,47 +20,40 @@ function Detail() {
           //redirect Home page
         }
       });
-  }, []);
-
+  }, [id]);
   console.log(movie);
   return (
     <Container>
-      <Background>
-        <img
-          src="https://cdn.vox-cdn.com/thumbor/wJ71E7nJ_4Wj0btm5seEnHNJ4Xk=/0x0:4096x2304/1200x800/filters:focal(1973x1175:2627x1829)/cdn.vox-cdn.com/uploads/chorus_image/image/60190709/BO_RGB_s120_22a_cs_pub.pub16.318.0.jpg"
-          alt=""
-        />
-      </Background>
-      <ImageTitle>
-        <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/E83AAB9620FC72320D8CBA8D5E1421635AC4C961B08ADC3F691B031A24D7CD38/scale?width=1920&aspectRatio=1.78&format=png"
-          alt=""
-        />
-      </ImageTitle>
-      <Controls>
-        <PlayButton>
-          <img src="/images/play-icon-black.png" alt="" />
-          <span>PLAY</span>
-        </PlayButton>
-        <TrailerButton>
-          <img src="/images/play-icon-white.png" alt="" />
-          <span>TRAILER</span>
-        </TrailerButton>
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-        <GroupWatchButton>
-          <img src="/images/group-icon.png" alt="group icon" />
-        </GroupWatchButton>
-      </Controls>
-      <Subtitle>
-        Family, Fantasy, Kids, Animation
-        <Description>
-          A Chinese mom who’s sad when her grown son leaves home gets another
-          chance at motherhood when one of her dumplings springs to life. But
-          she finds that nothing stays cute and small forever.
-        </Description>
-      </Subtitle>
+      {movie && (
+        <>
+          <Background>
+            <img src={movie.backgroundImg} alt={movie.titleImg} />
+          </Background>
+          <ImageTitle>
+            <img src={movie.titleImg} alt="" />
+          </ImageTitle>
+          <Controls>
+            <PlayButton>
+              <img src="/images/play-icon-black.png" alt="" />
+              <span>PLAY</span>
+            </PlayButton>
+            <TrailerButton>
+              <img src="/images/play-icon-white.png" alt="" />
+              <span>TRAILER</span>
+            </TrailerButton>
+            <AddButton>
+              <span>+</span>
+            </AddButton>
+            <GroupWatchButton>
+              <img src="/images/group-icon.png" alt="group icon" />
+            </GroupWatchButton>
+          </Controls>
+          <Subtitle>
+            {movie.subtitle}
+            <Description>{movie.description}</Description>
+          </Subtitle>
+        </>
+      )}
     </Container>
   );
 }
