@@ -1,16 +1,46 @@
 import styled from "styled-components";
-import { selectUserName, selectUserPhoto } from "../features/user/userSlice";
-import { useSelector } from "react-redux";
+import {
+  selectUserName,
+  selectUserPhoto,
+  setSignOut,
+  setUserLogin,
+} from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { auth, provider } from "../firebase";
 
 function Header() {
+  const history = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
+  const dispatch = useDispatch();
+
+  const signIn = () => {
+    auth.signInWithPopup(provider).then((result) => {
+      let user = result.user;
+      dispatch(
+        setUserLogin({
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        })
+      );
+      history("/");
+    });
+  };
+
+  const signOut = () => {
+    auth.signOut().then(() => {
+      dispatch(setSignOut());
+      history("/login");
+    });
+  };
   return (
     <Nav>
       <Logo src="/images/logo.svg" alt="logo" />
       {!userName ? (
         <LoginContainer>
-          <Login>Login</Login>
+          <Login onClick={signIn}>Login</Login>
         </LoginContainer>
       ) : (
         <>
@@ -40,7 +70,7 @@ function Header() {
               <span>SERIES</span>
             </a>
           </NavMenu>
-          <UserImg src="https://i.imgur.com/dGo8DOk.jpg" />
+          <UserImg onClick={signOut} src={userPhoto} alt={userName} />
         </>
       )}
     </Nav>
