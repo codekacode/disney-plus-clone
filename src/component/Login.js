@@ -1,6 +1,10 @@
 import styled from "styled-components";
+// import {selectUserName, selectUserPhoto} from "../features/user/userSlice";
+// import {useSelector} from "react-redux";
 
 function Login() {
+  // const userName = useSelector(selectUserName);
+  // const userPhoto = useSelector(selectUserPhoto);
   return (
     <Container>
       <CTA>
