@@ -8,12 +8,28 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth, provider } from "../firebase";
+import { useEffect } from "react";
 
 function Header() {
   const history = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        dispatch(
+          setUserLogin({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          })
+        );
+        history("/");
+      }
+    });
+  }, []);
 
   const signIn = () => {
     auth.signInWithPopup(provider).then((result) => {
