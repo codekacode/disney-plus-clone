@@ -29,7 +29,7 @@ function Header() {
         history("/");
       }
     });
-  }, []);
+  }, [userName]);
 
   const signIn = () => {
     auth.signInWithPopup(provider).then((result) => {
@@ -46,10 +46,13 @@ function Header() {
   };
 
   const signOut = () => {
-    auth.signOut().then(() => {
-      dispatch(setSignOut());
-      history("/login");
-    });
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(setSignOut());
+        history("/login");
+      })
+      .catch((err) => alert(err.message));
   };
   return (
     <Nav>
@@ -156,6 +159,7 @@ const UserImg = styled.img`
   /* position: absolute;
   right: 30px; */
   cursor: pointer;
+  border-radius: 50%;
 `;
 
 const Login = styled.div`
